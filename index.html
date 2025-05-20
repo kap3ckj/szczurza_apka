@@ -1,20 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>SZCZURZY GRAFIK</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="manifest.json">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="SZCZURZY GRAFIK">
-  <link rel="apple-touch-icon" href="icon.png">
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-        .then(() => console.log('Service Worker zarejestrowany!'));
-    }
-  </script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SZCZURZY GRAFIK</title>
@@ -74,38 +61,6 @@
 </style>
 </head>
 <body>
-  <h1>SZCZURZY GRAFIK</h1>
-  <label for="shift">Wybierz zmianę:</label>
-  <select id="shift">
-    <option value="1a">1a (8:00–14:00)</option>
-    <option value="1">1 (8:00–15:00)</option>
-    <option value="3">3 (8:00–16:00)</option>
-    <option value="2a">2a (14:00–22:00)</option>
-    <option value="2">2 (15:00–22:00)</option>
-    <option value="4">4 (16:00–22:00)</option>
-  </select><br><br>
-
-  <label for="people">Ile osób na zmianie?</label>
-  <select id="people">
-    <option value="5">5 osób</option>
-    <option value="6">6 osób</option>
-    <option value="7">7 osób</option>
-  </select><br><br>
-
-  <button onclick="calculate()">Sprawdź stanowisko</button>
-
-  <p id="result"></p>
-
-  <script>
-    const stanowiska = {
-      1: "Fala",
-      2: "Oczko",
-      3: "Rzeczka",
-      4: "Sportowy 1h",
-      5: "Sportowy 30min",
-      6: "Monitoring",
-      7: "Solanka"
-    };
   <div class="container">
     <h1>SZCZURZY GRAFIK</h1>
     <label for="shift">Wybierz zmianę:</label>
@@ -126,13 +81,6 @@
     <div id="result"></div>
   </div>
 
-    const shiftDurations = {
-      "1a": 6 * 60,
-      "1": 7 * 60,
-      "3": 8 * 60,
-      "2a": 8 * 60,
-      "2": 7 * 60,
-      "4": 6 * 60
 <script>
   function calculatePosition() {
     const shifts = {
@@ -144,27 +92,6 @@
       '4': [16,22]
     };
 
-    function calculate() {
-      const shift = document.getElementById('shift').value;
-      const people = parseInt(document.getElementById('people').value);
-      const totalMinutes = shiftDurations[shift];
-      const numSlots = totalMinutes / 30;
-
-      for (let i = 0; i < people; i++) {
-        let slotIndex = i;
-        for (let slot = 1; slot <= numSlots; slot++) {
-          if (slot === numSlots && ((slotIndex % people) + 1) === 6) {
-            const stanowisko = stanowiska[(i % people) + 1];
-            document.getElementById('result').innerText =
-              `Wpisz się na stanowisko nr ${(i % people) + 1} – ${stanowisko}`;
-            return;
-          }
-          slotIndex++;
-        }
-      }
-
-      document.getElementById('result').innerText =
-        "Nie znaleziono ustawienia kończącego zmianę na 'monitoring'.";
     const positions = ['fala', 'oczko', 'rzeczka', 'sportowy 1h', 'sportowy 30min', 'monitoring', 'solanka'];
 
     const shift = document.getElementById('shift').value;
@@ -174,7 +101,6 @@
       document.getElementById('result').textContent = 'Liczba osób musi być od 5 do 7!';
       return;
     }
-  </script>
 
     const [start, end] = shifts[shift];
 
