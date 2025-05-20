@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -103,39 +102,11 @@
     }
 
     const [start, end] = shifts[shift];
-
-    // Każde stanowisko trwa 0.5h, więc start + 0.5*people = end
-    // Monitoring to stanowisko 6 (indeks 5)
-    // Chcemy znaleźć od której zmiany zacząć, aby monitoring był ostatni.
-
-    // Wyliczamy czas rozpoczęcia monitoring (ostatniego stanowiska)
-    const monitoringStart = end - 0.5;
-
-    // Liczymy, które stanowisko zaczyna się o tej godzinie
-    // Skoro monitoring to stanowisko nr 6, musi się odbyć na końcu
-
-    // Wyliczamy przesunięcie w stanowiskach, by monitoring był na końcu:
-    // monitoring na stanowisku (people) musi mieć czas monitoringStart
-    // więc start stanowiska n = monitoringStart - (people - n) * 0.5
-
-    // Jednak w tej prostej wersji:
-    // stanowisko do wpisania to: people - (liczba osób na zmianie - 6)
-    // ale liczba stanowisk = liczba osób
-
-    // W naszym uproszczeniu:
-    // stanowisko kończące to monitoring (nr 6), więc musimy obliczyć, od którego stanowiska zacząć,
-    // aby monitoring był ostatni
-
-    // Wariant uproszczony - wynik to stanowisko o indeksie: people - (6 - 1)
-    // ponieważ stanowiska liczymy od 1, a monitoring to 6
-
-    let posIndex = people - (6 - 1); // czyli people - 5
-
+    let posIndex = people - (6 - 1);
     if(posIndex < 1) posIndex = 1;
     if(posIndex > people) posIndex = people;
 
     const stanowisko = positions[posIndex - 1];
-
     document.getElementById('result').textContent = `Stanowisko do zakończenia na Monitoring to: ${posIndex}. ${stanowisko}`;
   }
 </script>
